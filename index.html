@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PJJ Koding dan KA Kelas VIII - MTsN 6 Pesisir Selatan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#4f46e5; --p2:#7c3aed; --acc:#06b6d4; --ok:#10b981; --bad:#ef4444; --warn:#f59e0b;
+  --ink:#1e1b4b; --mute:#64748b; --line:#e2e8f0; --bg:#f1f5ff; --card:#ffffff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:'Poppins','Segoe UI',Tahoma,sans-serif; color:var(--ink); line-height:1.65;
+  background:radial-gradient(1200px 500px at 10% -10%,#e0e7ff 0,transparent 60%),radial-gradient(900px 500px at 100% 0,#cffafe 0,transparent 55%),var(--bg);
+  min-height:100vh; padding-bottom:60px;
+  -webkit-user-select:none; -ms-user-select:none; user-select:none; -webkit-touch-callout:none;
+}
+input[type=text],input[type=password],select{-webkit-user-select:text;user-select:text}
+
+/* ---------- HEADER ---------- */
+header{
+  background:linear-gradient(135deg,#0f766e 0%,#4f46e5 55%,#7c3aed 100%); color:#fff;
+  padding:22px 16px 70px; text-align:center; position:relative; overflow:hidden;
+}
+header::before,header::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
+header::before{width:220px;height:220px;left:-60px;top:-80px}
+header::after{width:300px;height:300px;right:-90px;bottom:-160px}
+header h1{margin:0;font-size:1.55rem;font-weight:800;letter-spacing:.2px;position:relative}
+header p{margin:4px 0 0;font-size:.88rem;opacity:.9;position:relative}
+.badge-ai{display:inline-block;margin-bottom:8px;padding:3px 12px;border-radius:999px;background:rgba(255,255,255,.18);font-size:.72rem;font-weight:600;letter-spacing:1px;position:relative}
+
+/* ---------- LAYOUT ---------- */
+.container{max-width:820px;margin:-48px auto 0;width:92%;position:relative;z-index:2}
+.card{background:var(--card);border-radius:22px;padding:26px;box-shadow:0 12px 40px rgba(49,46,129,.12);margin-bottom:18px}
+.step{display:none;animation:rise .45s ease both}
+.step.active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+h2.title{margin:0 0 6px;font-size:1.35rem;font-weight:700}
+.sub{color:var(--mute);margin:0 0 18px;font-size:.92rem}
+
+/* ---------- STEPPER + HUD ---------- */
+#hud{display:none;margin-bottom:16px}
+#hud .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+#student-info{font-weight:600;font-size:.92rem}
+.chip{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;font-weight:700;font-size:.82rem;padding:5px 12px;border-radius:999px;box-shadow:0 2px 8px rgba(245,158,11,.25)}
+.stepper{display:flex;gap:6px;margin-top:12px}
+.stepper div{flex:1;text-align:center;font-size:.68rem;font-weight:600;color:var(--mute)}
+.stepper div i{display:block;height:6px;border-radius:6px;background:var(--line);margin-bottom:5px;transition:.4s}
+.stepper div.done i{background:var(--ok)}
+.stepper div.now i{background:linear-gradient(90deg,var(--p),var(--acc))}
+.stepper div.now{color:var(--p)}
+
+/* ---------- BUTTONS ---------- */
+.btn{
+  display:block;width:100%;border:0;cursor:pointer;margin-top:16px;padding:14px 20px;border-radius:14px;
+  font:600 1rem 'Poppins',sans-serif;color:#fff;background:linear-gradient(135deg,var(--p),var(--p2));
+  box-shadow:0 8px 20px rgba(79,70,229,.3);transition:transform .15s,box-shadow .15s,filter .15s;
+}
+.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 26px rgba(79,70,229,.38)}
+.btn:active:not(:disabled){transform:translateY(0)}
+.btn:disabled{background:#cbd5e1;box-shadow:none;cursor:not-allowed;color:#64748b}
+.btn.green{background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 8px 20px rgba(16,185,129,.3)}
+.btn.ghost{background:#fff;color:var(--p);border:2px solid var(--p);box-shadow:none}
+.btn.sm{display:inline-block;width:auto;margin:0;padding:10px 18px;font-size:.9rem}
+
+/* ---------- FORMS ---------- */
+.field{margin-bottom:14px}
+.field label{font-weight:600;font-size:.88rem}
+.field input,.field select,.input{
+  width:100%;padding:13px 14px;margin-top:6px;border:2px solid var(--line);border-radius:12px;font:500 1rem 'Poppins',sans-serif;
+  color:var(--ink);background:#fff;transition:border .2s,box-shadow .2s;
+}
+.field input:focus,.field select:focus,.input:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 4px rgba(79,70,229,.12)}
+
+/* ---------- TATA TERTIB ---------- */
+.rules{background:linear-gradient(135deg,#fff1f2,#fff7ed);border:1px solid #fecdd3;border-radius:16px;padding:16px 18px;margin-bottom:18px}
+.rules h3{margin:0 0 8px;font-size:1rem;color:#be123c}
+.rules ol{margin:0;padding-left:20px;font-size:.88rem;color:#7f1d1d}
+.rules li{margin-bottom:4px}
+
+/* ---------- MATERI ---------- */
+.timer-box{
+  position:sticky;top:8px;z-index:20;text-align:center;font-weight:700;font-size:1.05rem;padding:12px;border-radius:14px;margin-bottom:16px;
+  background:linear-gradient(135deg,#fffbeb,#fef3c7);color:#b45309;border:2px solid #fcd34d;box-shadow:0 6px 18px rgba(245,158,11,.2)
+}
+.timer-box.ok{background:linear-gradient(135deg,#ecfdf5,#d1fae5);color:#047857;border-color:#6ee7b7}
+.timer-box.danger{background:linear-gradient(135deg,#fef2f2,#fee2e2);color:#b91c1c;border-color:#fca5a5}
+.progress-wrap{height:8px;background:#fde68a;border-radius:8px;margin-top:8px;overflow:hidden}
+.progress-wrap i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--warn),var(--ok));transition:width 1s linear}
+
+.materi{border-radius:18px;padding:20px 22px;margin:18px 0 10px;border:1px solid var(--line);background:linear-gradient(180deg,#fff,#f8faff);position:relative}
+.materi .tag{position:absolute;top:-12px;left:18px;background:linear-gradient(135deg,var(--p),var(--acc));color:#fff;font-weight:700;font-size:.75rem;padding:4px 14px;border-radius:999px}
+.materi h4{margin:6px 0 8px;font-size:1.12rem;color:var(--p)}
+.materi p,.materi li{font-size:.94rem}
+.callout{background:#eef2ff;border-left:4px solid var(--p);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.9rem}
+.tbl{width:100%;border-collapse:collapse;font-size:.85rem;margin:10px 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.tbl th{background:#eef2ff;color:#3730a3}
+.kuis{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:18px;padding:16px;margin-bottom:26px}
+.kuis h4{margin:0 0 4px}
+.kuis .score{font-size:.82rem;font-weight:600;color:var(--mute);margin-bottom:8px}
+
+/* ---------- SOAL & OPSI ---------- */
+.qcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
+.qtext{margin:0 0 8px;font-weight:500;font-size:.96rem}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;margin:8px 0;border:2px solid var(--line);border-radius:12px;cursor:pointer;transition:.18s;font-size:.92rem;background:#fff;position:relative}
+.opt:hover{border-color:#a5b4fc;background:#f8faff}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .dot{width:20px;height:20px;border-radius:50%;border:2px solid #b8c0d4;flex:none;margin-top:3px;transition:.18s}
+.opt:has(input:checked){border-color:var(--p);background:#eef2ff}
+.opt:has(input:checked) .dot{background:var(--p);border-color:var(--p);box-shadow:inset 0 0 0 4px #fff}
+.opt.locked{cursor:default}
+.opt.correct{border-color:var(--ok)!important;background:#ecfdf5!important}
+.opt.correct .dot{background:var(--ok)!important;border-color:var(--ok)!important}
+.opt.wrong{border-color:var(--bad)!important;background:#fef2f2!important}
+.opt.wrong .dot{background:var(--bad)!important;border-color:var(--bad)!important}
+.fb{font-size:.84rem;font-weight:600;margin-top:6px;display:none}
+.fb.ok{color:#047857;display:block}.fb.no{color:#b91c1c;display:block}
+
+/* ---------- KUIS BERTAHAP (ulang dari awal jika salah) ---------- */
+.kuis-info{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #3b82f6;border-radius:12px;padding:10px 14px;margin:6px 0 10px;font-size:.84rem;color:#1e3a8a}
+.kuis-info b.t{display:block;margin-bottom:4px}
+.kuis-info ul{margin:4px 0 0;padding-left:18px}
+.kuis-info li{margin:2px 0;font-size:.84rem}
+.dots{display:flex;gap:6px;margin:4px 0 2px}
+.dots i{flex:1;height:7px;border-radius:7px;background:var(--line)}
+.dots i.ok{background:var(--ok)}
+.dots i.now{background:linear-gradient(90deg,var(--p),var(--acc))}
+.hintbox{margin-top:8px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:8px 12px;font-size:.84rem;color:#92400e;font-weight:500}
+.btn-mini{display:block;width:100%;border:0;cursor:pointer;margin-top:12px;padding:11px 16px;border-radius:12px;font:600 .92rem 'Poppins',sans-serif;color:#fff;background:linear-gradient(135deg,var(--p),var(--p2))}
+.btn-mini:disabled{opacity:.45;cursor:not-allowed}
+.btn-mini.red{background:linear-gradient(135deg,#ef4444,#dc2626)}
+.btn-mini.green{background:linear-gradient(135deg,#10b981,#059669)}
+.petunjuk{background:linear-gradient(180deg,#fffbeb,#fff7d6);border:2px solid #fcd34d;border-radius:16px;padding:14px 18px;margin:12px 0 6px}
+.petunjuk h3{margin:0 0 6px;font-size:1.02rem;color:#92400e}
+.petunjuk ol{margin:6px 0 0;padding-left:20px}
+.petunjuk li{margin:5px 0;font-size:.9rem}
+.contoh-catatan{background:#fff;border:1px dashed #f59e0b;border-radius:10px;padding:8px 12px;margin-top:8px;font-size:.84rem;color:#78350f}
+
+/* ---------- SIMULASI ---------- */
+.locked-box{text-align:center;padding:30px 20px;background:linear-gradient(135deg,#fffbeb,#fef3c7);border-radius:18px;border:2px solid #fde68a}
+.locked-box .lock{font-size:2.6rem}
+.sim{border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px;background:linear-gradient(180deg,#fff,#f8faff);position:relative}
+.sim h4{margin:0 0 6px;color:var(--p)}
+.sim .done-mark{position:absolute;right:16px;top:14px;font-size:.78rem;font-weight:700;color:#047857;background:#d1fae5;padding:3px 10px;border-radius:999px;display:none}
+.sim.done .done-mark{display:inline-block}
+.bars{margin-top:12px}
+.bar{margin:8px 0;font-size:.85rem;font-weight:600}
+.bar .track{height:16px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-top:4px}
+.bar .fill{height:100%;width:0;border-radius:10px;transition:width 1s ease;background:linear-gradient(90deg,var(--ok),#34d399);color:#fff;font-size:.7rem;text-align:right;padding-right:6px;line-height:16px}
+.bar .fill.low{background:linear-gradient(90deg,var(--bad),#f87171)}
+.bar .fill.mid{background:linear-gradient(90deg,var(--warn),#fbbf24)}
+.kasus{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:10px}
+.kasus .ai{background:#eef2ff;border-radius:10px;padding:10px 12px;font-size:.9rem;margin-bottom:8px}
+.kasus .acts{display:flex;gap:8px;flex-wrap:wrap}
+.kasus .acts button{flex:1;min-width:140px;border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px;font:600 .85rem 'Poppins',sans-serif;cursor:pointer;color:var(--p)}
+.kasus .acts button:hover:not(:disabled){background:#eef2ff;border-color:#a5b4fc}
+.kasus .acts button:disabled{opacity:.55;cursor:default}
+.kasus .res{margin-top:8px;font-size:.86rem;font-weight:600;display:none}
+.scan-ring{width:170px;height:170px;border-radius:50%;margin:10px auto;position:relative;overflow:hidden;background:#0f172a;border:4px solid var(--acc);box-shadow:0 0 0 6px rgba(6,182,212,.15)}
+.scan-ring video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.scan-ring .beam{position:absolute;left:0;right:0;height:3px;background:#22d3ee;box-shadow:0 0 14px #22d3ee;top:0;display:none}
+.scan-ring.run .beam{display:block;animation:beam 1.4s linear infinite}
+@keyframes beam{0%{top:0}50%{top:100%}100%{top:0}}
+.scan-ring .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:.8rem;text-align:center;padding:10px}
+.pixgrid{display:none;grid-template-columns:repeat(8,1fr);gap:2px;max-width:320px;margin:12px auto;border-radius:10px;overflow:hidden}
+.pixgrid div{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700}
+
+/* ---------- UJIAN ---------- */
+.exam-bar{position:sticky;top:8px;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;border-radius:14px;background:#fff;border:2px solid #fcd34d;box-shadow:0 6px 18px rgba(0,0,0,.1);margin-bottom:14px;font-weight:700}
+.exam-bar .t{color:#b45309;font-size:1.05rem}
+.exam-bar .t.danger{color:var(--bad);animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.5}}
+.exam-bar .c{font-size:.85rem;color:var(--p)}
+.warn-title{text-align:center;color:var(--bad);font-size:.95rem;margin:0 0 12px}
+
+/* ---------- RAPOR ---------- */
+.rapor{text-align:center;padding:26px 18px;border-radius:20px;margin-bottom:20px;background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:2px solid #34d399}
+.rapor.fail{background:linear-gradient(135deg,#fef2f2,#fee2e2);border-color:#f87171}
+.rapor h2{margin:0;color:#065f46}
+.rapor.fail h2{color:#991b1b}
+.rapor .nilai{font-size:3.4rem;font-weight:800;margin:6px 0;line-height:1.1}
+.meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.meta span{background:#fff;border-radius:999px;padding:4px 12px;font-size:.78rem;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.feedback-item{background:#fff;padding:10px 14px;border-left:5px solid;margin-bottom:10px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);font-size:.88rem}
+.feedback-item.benar{border-color:var(--ok)}
+.feedback-item.salah{border-color:var(--bad)}
+.topik-tag{display:inline-block;margin:6px 0 2px;padding:2px 10px;border-radius:999px;background:#eef2ff;color:#4338ca;font-size:.7rem;font-weight:700}
+.jwb-siswa{color:#b91c1c;margin-top:4px}
+.jwb-benar{color:#047857;margin-top:2px}
+.penjelasan{margin-top:8px;padding:8px 12px;background:#fffbeb;border-radius:8px;color:#78350f;font-size:.84rem;line-height:1.5}
+.motivasi{background:linear-gradient(135deg,#eef2ff,#faf5ff);border:2px solid #c7d2fe;border-radius:20px;padding:20px 18px;margin-bottom:20px}
+.motivasi.curang{background:linear-gradient(135deg,#fff7ed,#ffedd5);border-color:#fdba74}
+.motivasi h3{margin:0 0 8px;color:#3730a3}
+.motivasi.curang h3{color:#9a3412}
+.motivasi p{margin:6px 0;font-size:.9rem;line-height:1.6}
+.mot-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.mot-col{background:#fff;border-radius:14px;padding:12px 14px;font-size:.84rem;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.mot-col b{display:block;margin-bottom:6px}
+.mot-col ul{margin:0;padding-left:18px}
+.mot-quote{text-align:center;font-weight:700;color:#4338ca;margin-top:12px!important}
+@media (max-width:600px){.mot-grid{grid-template-columns:1fr}}
+
+/* ---------- KAMERA & MODAL ---------- */
+#floating-cam{position:fixed;bottom:16px;right:16px;width:118px;height:88px;background:#000;border:3px solid var(--p);border-radius:14px;z-index:900;display:none;transform:scaleX(-1);object-fit:cover;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+#cam-label{position:fixed;bottom:100px;right:20px;z-index:901;display:none;background:rgba(220,38,38,.92);color:#fff;font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:999px}
+#modal{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);z-index:2000;display:none;align-items:center;justify-content:center;padding:18px}
+#modal.show{display:flex}
+#modal .box{background:#fff;border-radius:22px;max-width:420px;width:100%;padding:26px;text-align:center;animation:pop .25s ease both}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:none;opacity:1}}
+#modal .ic{font-size:2.8rem}
+#modal h3{margin:6px 0}
+#modal .body{font-size:.92rem;color:#475569}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:3000}
+
+/* ---------- ANTI SCREENSHOT ---------- */
+#wm{position:fixed;inset:0;z-index:1500;pointer-events:none;display:none;background-repeat:repeat}
+body.shield .container{filter:blur(22px);transition:filter .05s}
+body.shield .container *{pointer-events:none}
+@media print{#wm{display:none!important}}
+/* ---------- PRINT ---------- */
+@media print{
+  body{background:#fff;-webkit-user-select:auto;user-select:auto}
+  body *{visibility:hidden}
+  #hasil-akhir,#hasil-akhir *{visibility:visible}
+  #hasil-akhir{position:absolute;left:0;top:0;width:100%}
+  .no-print,.btn,#floating-cam,#cam-label,header{display:none!important}
+  .card{box-shadow:none;padding:0}
+}
+@media (max-width:600px){
+  .card{padding:18px;border-radius:18px}
+  header h1{font-size:1.25rem}
+  #floating-cam{width:92px;height:70px;bottom:10px;right:10px}
+  #cam-label{bottom:84px;right:14px}
+  .stepper div{font-size:.58rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="badge-ai">🤖 KECERDASAN ARTIFISIAL</span>
+  <h1>PJJ Koding dan KA Kelas VIII</h1>
+  <p>MTsN 6 Pesisir Selatan • Belajar Cerdas, Jujur, dan Kritis</p>
+</header>
+
+<video id="floating-cam" autoplay playsinline muted></video>
+<div id="cam-label">● PENGAWASAN</div>
+<canvas id="confetti"></canvas>
+<div id="wm"></div>
+
+<div id="modal"><div class="box">
+  <div class="ic" id="m-ic"></div><h3 id="m-title"></h3><div class="body" id="m-body"></div>
+  <button class="btn" id="m-ok">OK</button>
+  <button class="btn ghost" id="m-cancel" style="display:none">Batal</button>
+</div></div>
+
+<div class="container">
+
+  <div class="card" id="hud">
+    <div class="row">
+      <div id="student-info"></div>
+      <div class="chip" id="xp-chip">⭐ 0 XP • Pemula</div>
+    </div>
+    <div class="stepper" id="stepper">
+      <div data-s="step-login"><i></i>Presensi</div>
+      <div data-s="step-apersepsi"><i></i>Diagnostik</div>
+      <div data-s="step-materi"><i></i>Materi</div>
+      <div data-s="step-simulasi"><i></i>Simulasi</div>
+      <div data-s="step-formatif"><i></i>Ujian</div>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <!-- 1. LOGIN -->
+    <div id="step-login" class="step active">
+      <h2 class="title">Presensi & Verifikasi PJJ</h2>
+      <p class="sub">Baca tata tertib, aktifkan kamera, lalu isi data dirimu.</p>
+
+      <div class="rules">
+        <h3>⚠️ Tata Tertib PJJ Koding dan KA</h3>
+        <ol>
+          <li>Wajib <b>membaca dan mencatat (meringkas)</b> materi di <b>buku catatan</b> selama <b>30 menit</b>. Waktu hanya berjalan saat halaman ini terbuka. Siapkan buku dan alat tulis sebelum mulai.</li>
+          <li>Wajib menjawab seluruh kuis materi dan mencoba <b>seluruh simulasi</b> sebelum Ujian Akhir. Kuis materi dinyatakan <b>tuntas</b> jika kelima soal benar dalam satu percobaan; bila ada yang salah, kuis <b>diulang dari awal</b> dengan soal dan pilihan yang diacak.</li>
+          <li><b>Pengawasan aktif:</b> dilarang membuka aplikasi/tab lain. Setiap pelanggaran dicatat. <b>3 kali meninggalkan halaman = nilai langsung 0</b> dan sesi dihentikan.</li>
+          <li>Dilarang menyalin (copy-paste) soal ke AI lain. Jika terdeteksi, nilai otomatis 0.</li>
+          <li><b>KKM 75.</b> Nilai di bawah 75 wajib <b>remedial</b> sampai tuntas untuk melihat rapor.</li>
+          <li><b>Kirim PDF rapor atau Screen Shoot Nilai Tes Akhir</b> lalu kirim ke Group WA untuk memastikan ananda selesai mengerjakan.</li>
+        </ol>
+      </div>
+
+      <button class="btn" id="btn-kamera" onclick="aktifkanKamera()">📷 1. Aktifkan Kamera Pengawas (Wajib)</button>
+
+      <div id="form-data-diri" style="display:none;margin-top:18px">
+        <div class="field"><label>Nama Lengkap</label><input type="text" id="nama-siswa" placeholder="Masukkan nama lengkapmu" autocomplete="off"></div>
+        <div class="field"><label>Kelas</label>
+          <select id="kelas-siswa">
+            <option value="">-- Pilih Kelas --</option>
+            <option value="VIIIa">VIII a</option><option value="VIIIb">VIII b</option>
+            <option value="VIIIc">VIII c</option><option value="VIIId">VIII d</option>
+          </select>
+        </div>
+        <button class="btn green" onclick="mulaiApersepsi()">🚀 2. Saya Setuju Tata Tertib & Mulai Belajar</button>
+      </div>
+    </div>
+
+    <!-- 2. APERSEPSI -->
+    <div id="step-apersepsi" class="step">
+      <h2 class="title">Apersepsi: Seberapa Tahu Kamu?</h2>
+      <p class="sub">Jawab 10 pertanyaan sesuai pengetahuan awalmu. Tidak dinilai, tapi dapat <b>+10 XP</b>!</p>
+      <div id="diag-container"></div>
+      <button class="btn" onclick="lanjutMateri()">Kirim Jawaban & Mulai Belajar ➔</button>
+    </div>
+
+    <!-- 3. MATERI -->
+    <div id="step-materi" class="step">
+      <div id="timer-materi" class="timer-box">
+        <div id="timer-text">Wajib membaca & mencatat: 30:00</div>
+        <div class="progress-wrap"><i id="timer-bar"></i></div>
+      </div>
+
+      <h2 class="title" style="text-align:center">📖 Modul Kecerdasan Artifisial Kelas VIII</h2>
+      <p class="sub" style="text-align:center">Baca dan catat dengan saksama, lalu jawab kuis di tiap bagian. Setiap soal yang benar = <b>+10 XP</b>.</p>
+      <div class="petunjuk">
+        <h3>📋 PETUNJUK BELAJAR — Baca dulu sebelum mulai!</h3>
+        <ol>
+          <li><b>Siapkan buku catatan dan alat tulis.</b> Tulis <b>nama dan kelas</b> di halaman pertama. Catatan ini bisa diperiksa guru, jadi simpan dengan baik.</li>
+          <li><b>Baca materi secara berurutan</b> (Bagian A ➔ B ➔ C). <b>Sambil membaca, kamu WAJIB mencatat (meringkas)</b> dengan bahasamu sendiri, bukan menyalin kata per kata. Catat minimal: <b>pengertian, ciri/perbedaan, dan contoh</b>. Boleh berbentuk poin, tabel, atau peta konsep.</li>
+          <li><b>Pengatur waktu 30 menit</b> ada di atas layar. Waktu hanya berjalan saat halaman ini terbuka, dan berhenti jika kamu pindah tab/aplikasi.</li>
+          <li><b>Kerjakan kuis di akhir tiap bagian</b> setelah selesai mencatat bagian tersebut. Tiap kuis berisi <b>5 soal</b>. Jika <b>ada satu saja yang salah</b>, jawaban benar <u>tidak ditampilkan</u> dan kuis <b>diulang dari soal pertama</b> dengan urutan soal dan pilihan jawaban <b>diacak</b>. Jadi pahami isinya, jangan menghafal letak jawaban. Baca ulang materi dan catatanmu sebelum mengulang. Jumlah percobaan tidak dibatasi.</li>
+          <li><b>Tombol "Selesaikan Materi" aktif</b> jika: ⏳ waktu 30 menit habis, ✍️ catatan sudah dibuat (centang di bagian bawah), dan 📝 kuis A, B, C sudah tuntas.</li>
+        </ol>
+        <div class="contoh-catatan"><b>Contoh catatan Bagian A:</b> (1) KA = alat bantu manusia, bukan pengganti. (2) Mengapa tidak boleh percaya penuh: bisa salah, bias, halusinasi, tanpa nurani, bikin ketergantungan. (3) Contoh: pakai KA untuk ide awal, lalu cek sendiri.</div>
+      </div>
+
+      <div class="materi"><span class="tag">BAGIAN A</span>
+        <h4>KA sebagai Alat Bantu Manusia</h4>
+        <p>Kecerdasan Artifisial (KA) diciptakan untuk <b>membantu</b> pekerjaan manusia, bukan menggantikan manusia sepenuhnya. KA unggul pada tugas yang berulang, bervolume besar, dan butuh kecepatan, misalnya menerjemahkan, merangkum, mengenali gambar, atau menyarankan rute perjalanan.</p>
+        <div class="callout"><b>Ingat:</b> KA adalah <i>alat bantu (tools)</i>. Manusia tetap menjadi pemegang kendali dan bertanggung jawab penuh atas keputusan akhir.</div>
+        <p><b>Mengapa manusia tidak boleh bergantung dan percaya sepenuhnya pada KA?</b></p>
+        <ul>
+          <li><b>Output bisa salah:</b> KA dapat memberi jawaban yang keliru, padahal terdengar yakin.</li>
+          <li><b>Output bisa bias:</b> KA belajar dari data buatan manusia yang mungkin tidak adil.</li>
+          <li><b>Halusinasi:</b> KA generatif dapat mengarang fakta yang tidak pernah ada.</li>
+          <li><b>Tanpa nurani:</b> KA tidak punya empati, moral, dan tanggung jawab seperti manusia.</li>
+          <li><b>Ketergantungan:</b> jika semua dikerjakan KA, kemampuan berpikir kritis dan kreativitas kita tidak terlatih.</li>
+        </ul>
+        <table class="tbl">
+          <tr><th>Tugas yang cocok untuk KA</th><th>Tugas yang harus dipegang manusia</th></tr>
+          <tr><td>Mengolah data besar, mencari pola, menerjemahkan, membuat draf awal</td><td>Menilai kebenaran, mempertimbangkan etika, empati, dan memutuskan hal penting</td></tr>
+        </table>
+      </div>
+      <div class="kuis"><h4>📝 Kuis Bagian A</h4><div class="kuis-info"><b class="t">ℹ️ Keterangan Kuis</b><ul><li>5 soal pilihan ganda, tiap soal hanya 1 jawaban benar. Pilih jawaban, lalu tekan <b>Periksa Jawaban</b>.</li><li>Jika ada <b>satu soal salah</b>, kuis <b>diulang dari soal 1</b> dengan soal dan pilihan yang <b>diacak</b>. Jawaban benar tidak diperlihatkan, hanya petunjuk bagian materi yang perlu dibaca ulang.</li><li>Kuis <b>tuntas</b> jika kelima soal benar dalam satu percobaan. Setiap soal memberi <b>+10 XP</b> (sekali saja).</li><li>✍️ Pastikan catatan bagian ini sudah kamu buat sebelum mengerjakan.</li></ul></div><div class="score" id="skor-qa">Soal 1 / 5</div><div id="kuis-a-container"></div></div>
+
+      <div class="materi"><span class="tag">BAGIAN B</span>
+        <h4>Perbedaan Cara Manusia dan KA Menggabungkan Informasi</h4>
+        <p>Manusia menerima informasi lewat banyak indera sekaligus (mata, telinga, hidung, kulit, lidah), lalu otak <b>menggabungkannya</b> menjadi satu pemahaman. Contohnya, saat menyeberang jalan kita melihat mobil dan mendengar klakson. KA juga dapat menggabungkan data dari beberapa sensor. Teknik ini disebut <b>penggabungan data sensor (sensor fusion)</b>.</p>
+        <table class="tbl">
+          <tr><th>Aspek</th><th>Manusia</th><th>KA</th></tr>
+          <tr><td>Sumber informasi</td><td>Indera + pengalaman hidup</td><td>Sensor (kamera, mikrofon, radar, dll.) + data latih</td></tr>
+          <tr><td>Cara menggabungkan</td><td>Intuisi, akal sehat, pemahaman konteks</td><td>Algoritma dan perhitungan pola angka</td></tr>
+          <tr><td>Kelebihan</td><td>Memahami konteks, makna, dan moral; bisa menilai kewajaran</td><td>Sangat cepat, konsisten, tidak lelah, mampu memproses banyak sensor sekaligus</td></tr>
+          <tr><td>Kelemahan</td><td>Mudah lelah, lambat untuk data besar</td><td>Tidak punya akal sehat; bisa salah jika data sensor buruk</td></tr>
+        </table>
+        <div class="callout"><b>Mengapa sensor digabung?</b> Setiap sensor punya kelemahan. Kamera sulit melihat saat kabut atau gelap, radar tidak bisa mengenali warna rambu. Jika digabung, sensor saling melengkapi sehingga hasilnya lebih akurat dan andal.</div>
+        <p>Contoh: <b>mobil otonom</b> memadukan kamera (mengenali rambu dan marka), radar (jarak dan kecepatan benda), dan LiDAR (peta 3D sekitar) untuk mengambil keputusan.</p>
+      </div>
+      <div class="kuis"><h4>📝 Kuis Bagian B</h4><div class="kuis-info"><b class="t">ℹ️ Keterangan Kuis</b><ul><li>5 soal pilihan ganda, tiap soal hanya 1 jawaban benar. Pilih jawaban, lalu tekan <b>Periksa Jawaban</b>.</li><li>Jika ada <b>satu soal salah</b>, kuis <b>diulang dari soal 1</b> dengan soal dan pilihan yang <b>diacak</b>. Jawaban benar tidak diperlihatkan, hanya petunjuk bagian materi yang perlu dibaca ulang.</li><li>Kuis <b>tuntas</b> jika kelima soal benar dalam satu percobaan. Setiap soal memberi <b>+10 XP</b> (sekali saja).</li><li>✍️ Pastikan catatan bagian ini sudah kamu buat sebelum mengerjakan.</li></ul></div><div class="score" id="skor-qb">Soal 1 / 5</div><div id="kuis-b-container"></div></div>
+
+      <div class="materi"><span class="tag">BAGIAN C</span>
+        <h4>Pemanfaatan Perangkat Penginderaan oleh KA</h4>
+        <p><b>Sensor</b> adalah perangkat yang menangkap informasi dari lingkungan lalu mengubahnya menjadi sinyal/data digital. Komputer tidak "melihat" atau "mendengar" seperti manusia, ia hanya memproses <b>angka</b> dari sensor, lalu mencocokkannya dengan pola yang dipelajari dari data latih.</p>
+        <table class="tbl">
+          <tr><th>Sensor</th><th>Menangkap</th><th>Contoh pemanfaatan KA</th></tr>
+          <tr><td>📷 Kamera</td><td>Cahaya / gambar</td><td>Presensi wajah, deteksi rambu, mobil otonom</td></tr>
+          <tr><td>🎤 Mikrofon</td><td>Suara</td><td>Asisten suara, ubah suara jadi teks</td></tr>
+          <tr><td>🌡️ Sensor suhu</td><td>Panas</td><td>AC pintar, termometer otomatis</td></tr>
+          <tr><td>📍 GPS</td><td>Posisi</td><td>Navigasi, ojek online</td></tr>
+          <tr><td>📡 Radar / LiDAR / ultrasonik</td><td>Jarak dan rintangan</td><td>Mobil otonom, robot penyedot debu</td></tr>
+          <tr><td>👆 Sensor sidik jari</td><td>Pola kulit jari</td><td>Kunci layar HP</td></tr>
+          <tr><td>⌚ Sensor optik detak jantung</td><td>Aliran darah</td><td>Smartwatch, peringatan awal kesehatan</td></tr>
+        </table>
+        <p><b>Alur kerja:</b> Sensor menangkap data ➔ data diubah menjadi angka digital ➔ KA mencocokkan dengan pola data latih ➔ KA mengambil keputusan/menghasilkan output.</p>
+        <div class="callout"><b>Gambar digital</b> tersusun dari <b>piksel</b>. Setiap piksel adalah angka (nilai kecerahan/warna). Gambar 1 foto sebenarnya adalah matriks angka yang sangat besar. Kualitas sensor (cahaya, noise) memengaruhi kualitas keputusan KA.</div>
+      </div>
+      <div class="kuis"><h4>📝 Kuis Bagian C</h4><div class="kuis-info"><b class="t">ℹ️ Keterangan Kuis</b><ul><li>5 soal pilihan ganda, tiap soal hanya 1 jawaban benar. Pilih jawaban, lalu tekan <b>Periksa Jawaban</b>.</li><li>Jika ada <b>satu soal salah</b>, kuis <b>diulang dari soal 1</b> dengan soal dan pilihan yang <b>diacak</b>. Jawaban benar tidak diperlihatkan, hanya petunjuk bagian materi yang perlu dibaca ulang.</li><li>Kuis <b>tuntas</b> jika kelima soal benar dalam satu percobaan. Setiap soal memberi <b>+10 XP</b> (sekali saja).</li><li>✍️ Pastikan catatan bagian ini sudah kamu buat sebelum mengerjakan.</li></ul></div><div class="score" id="skor-qc">Soal 1 / 5</div><div id="kuis-c-container"></div></div>
+
+      <label class="opt" style="margin-top:20px"><input type="checkbox" id="cek-catatan" onchange="cekTombolMateri()"><span class="dot" style="border-radius:6px"></span><span>✍️ Saya sudah <b>membaca dan mencatat (meringkas)</b> ketiga bagian materi di buku catatan.</span></label>
+      <button class="btn green" id="btn-lanjut-simulasi" disabled onclick="kumpulkanSemuaKuis()">Selesaikan Materi & Lanjut Simulasi ➔</button>
+      <p id="teks-tunggu-materi" style="text-align:center;color:#b45309;font-size:.85rem;font-weight:600">Tombol aktif setelah waktu selesai, catatan sudah dibuat (centang di atas), dan seluruh kuis (A, B, C) tuntas.</p>
+    </div>
+
+    <!-- 4. SIMULASI -->
+    <div id="step-simulasi" class="step">
+      <div class="locked-box" id="lock-simulasi">
+        <div class="lock">🔒</div>
+        <h3 style="margin:6px 0">Simulasi Terkunci</h3>
+        <p class="sub">Masukkan kode akses Simulasi dari Pak Irwan.</p>
+        <input type="password" class="input" id="kode-simulasi" placeholder="Masukkan kode" style="text-align:center" onkeydown="if(event.key==='Enter')bukaSimulasi()">
+        <button class="btn" onclick="bukaSimulasi()">Buka Simulasi</button>
+        <p id="error-simulasi" style="color:var(--bad);display:none;margin:10px 0 0;font-weight:600">Kode salah, coba lagi!</p>
+      </div>
+
+      <div id="konten-simulasi" style="display:none">
+        <h2 class="title">🧪 Laboratorium Simulasi AI</h2>
+        <p class="sub">Selesaikan ketiga simulasi untuk membuka Ujian Akhir. Tiap simulasi <b>+20 XP</b>.</p>
+
+        <div class="sim" id="sim1">
+          <span class="done-mark">✔ SELESAI</span>
+          <h4>▶ Simulasi 1: KA sebagai Alat Bantu</h4>
+          <p style="font-size:.9rem">Asisten KA memberi 3 jawaban/saran. Tentukan sikapmu: <b>percaya langsung</b> atau <b>verifikasi dulu</b>?</p>
+          <div id="kasus-container"></div>
+          <p id="hasil-sim1" style="font-weight:600;margin:10px 0 0;font-size:.9rem"></p>
+        </div>
+
+        <div class="sim" id="sim2">
+          <span class="done-mark">✔ SELESAI</span>
+          <h4>▶ Simulasi 2: Menggabungkan Informasi (Sensor Fusion)</h4>
+          <p style="font-size:.9rem">Mobil otonom melaju di jalan <b>berkabut tebal</b>. Coba <b>ketiga</b> konfigurasi sensor dan bandingkan hasilnya.</p>
+          <select id="sim-sensor" class="input">
+            <option value="kamera">Kamera saja</option>
+            <option value="radar">Radar saja</option>
+            <option value="gabung">Kamera + Radar + LiDAR (digabung)</option>
+          </select>
+          <button class="btn" onclick="simulasiFusion()" style="margin-top:10px">Jalankan Mobil</button>
+          <div class="bars" id="bars-fusion" style="display:none">
+            <div class="bar">Mendeteksi ada benda di depan<div class="track"><div class="fill" id="f-a"></div></div></div>
+            <div class="bar">Mengenali jenis benda (orang / mobil / rambu)<div class="track"><div class="fill" id="f-b"></div></div></div>
+          </div>
+          <p id="hasil-sim-fusion" style="font-weight:600;margin:10px 0 0;font-size:.9rem"></p>
+        </div>
+
+        <div class="sim" id="sim3" style="text-align:center">
+          <span class="done-mark">✔ SELESAI</span>
+          <h4>▶ Simulasi 3: Komputer Memaknai Gambar dari Sensor Kamera</h4>
+          <p style="font-size:.9rem">Kamera menangkap wajahmu, lalu komputer mengubahnya menjadi <b>matriks angka 8×8</b> (0 = hitam, 255 = putih).</p>
+          <div class="scan-ring" id="scan-ring"><video id="sim-video" autoplay playsinline muted></video><div class="beam"></div><div class="ph" id="scan-ph">Kamera siap</div></div>
+          <div class="pixgrid" id="pixgrid"></div>
+          <p id="hasil-scan" style="font-weight:700;color:#047857;display:none;margin:6px 0">✔️ Inilah yang "dilihat" komputer: hanya 64 angka, bukan gambar seperti pandangan manusia.</p>
+          <button class="btn" onclick="mulaiScan()" id="btn-scan">Tangkap & Ubah Jadi Angka</button>
+        </div>
+
+        <button class="btn" id="btn-lanjut-formatif" disabled onclick="lanjutFormatifLock()">🔒 Ujian Akhir Terkunci (selesaikan 3 simulasi)</button>
+      </div>
+    </div>
+
+    <!-- 5. UJIAN -->
+    <div id="step-formatif" class="step">
+      <div class="locked-box" id="lock-formatif">
+        <div class="lock">🔐</div>
+        <h3 style="margin:6px 0">Ujian Akhir Terkunci</h3>
+        <p class="sub">Masukkan kode akses ujian. Siapkan dirimu, waktu 30 menit!</p>
+        <input type="password" class="input" id="kode-formatif" placeholder="Masukkan kode" style="text-align:center" onkeydown="if(event.key==='Enter')bukaFormatif()">
+        <button class="btn" onclick="bukaFormatif()">Buka Ujian Akhir</button>
+        <p id="error-formatif" style="color:var(--bad);display:none;margin:10px 0 0;font-weight:600">Kode salah, coba lagi!</p>
+      </div>
+
+      <div id="konten-formatif" style="display:none">
+        <div class="exam-bar"><span class="t" id="timer-ujian">⏱ 30:00</span><span class="c" id="jml-terjawab">0 / 25 terjawab</span><span class="c" id="info-pelanggaran">⚠ 0/3</span></div>
+        <p class="warn-title"><b>DILARANG keluar browser / pindah tab / copy-paste!</b></p>
+        <div id="formatif-container"></div>
+        <button class="btn green" onclick="konfirmasiKumpul()">Kumpulkan & Cek KKM ✅</button>
+      </div>
+
+      <div id="hasil-akhir" style="display:none">
+        <div class="rapor" id="rapor-box">
+          <h2 id="rapor-judul">🎓 Rapor PJJ Koding dan KA</h2>
+          <h3 id="cetak-nama" style="margin:8px 0"></h3>
+          <div class="nilai" id="teks-nilai"></div>
+          <div id="rapor-status" style="font-weight:700"></div>
+          <div class="meta" id="rapor-meta"></div>
+        </div>
+        <div id="motivasi-box"></div>
+        <h3>Koreksi, Feedback & Penjelasan Jawaban</h3>
+        <div id="feedback-container"></div>
+        <button class="btn no-print" onclick="window.print()">🖨️ Simpan PDF / Cetak Rapor</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   PENGATURAN GURU (ubah di sini)
+   Catatan: kode & jawaban ada di sisi browser, jadi tidak
+   sepenuhnya aman dari siswa yang paham "View Source".
+   ===================================================== */
+const CONFIG = {
+  KODE_SIMULASI: "123",
+  KODE_UJIAN: "321",
+  WAKTU_MATERI: 1800,   // detik
+  WAKTU_UJIAN: 1800,    // detik
+  KKM: 75,
+  ANTI_SCREENSHOT: true,
+  NILAI_NOL_SELURUH_SESI: true,
+  MAX_PELANGGARAN: 3,
+  SCRIPT_URL: ""        // opsional: URL Google Apps Script untuk merekap nilai ke Google Sheets
+};
+
+const $ = id => document.getElementById(id);
+const S = { nama:"", kelas:"", xp:0, pelanggaran:0, percobaan:0, aktif:false, step:"step-login", kamera:false, curang:false, alasanCurang:"" };
+
+/* ---------------- DATA SOAL ---------------- */
+const diagData = [
+  {q:"Menurutmu, KA (AI) diciptakan terutama untuk...", o:["Membantu pekerjaan manusia","Menggantikan manusia sepenuhnya"]},
+  {q:"Jika AI memberi jawaban yang terdengar sangat yakin, apakah pasti benar?", o:["Pasti benar","Belum tentu, perlu dicek"]},
+  {q:"Saat menyeberang jalan, kamu memakai mata dan telinga sekaligus. Apakah ini contoh menggabungkan informasi dari beberapa indera?", o:["Ya","Bukan"]},
+  {q:"Menurutmu, apakah komputer 'melihat' gambar sama seperti manusia?", o:["Sama persis","Berbeda, komputer memproses angka"]},
+  {q:"Alat yang dipakai HP untuk mengenali suaramu saat memberi perintah suara adalah...", o:["Mikrofon","Layar sentuh"]},
+  {q:"Apakah kamu pernah mendengar istilah 'sensor' pada perangkat pintar (HP, AC, mobil)?", o:["Pernah","Belum"]},
+  {q:"Mobil yang bisa menyetir sendiri memakai lebih dari satu sensor. Menurutmu alasannya...", o:["Supaya tampak keren","Agar sensor saling melengkapi dan lebih akurat"]},
+  {q:"Siapa yang bertanggung jawab atas keputusan penting jika kita memakai bantuan AI?", o:["Manusia sebagai pengguna","AI sepenuhnya"]},
+  {q:"Aplikasi peta (GPS) mengetahui posisimu dengan bantuan...", o:["Sensor lokasi (GPS)","Sensor suhu"]},
+  {q:"Bolehkah kita selalu menyalin jawaban AI tanpa memahaminya?", o:["Boleh, lebih cepat","Tidak boleh, kemampuan berpikir bisa tumpul"]}
+];
+
+const kuisA = [
+  {q:"Peran yang tepat bagi KA dalam kehidupan sehari-hari adalah...", o:["Pengambil keputusan tunggal","Alat bantu manusia","Pengganti guru sepenuhnya"], a:1, h:"Baca ulang kotak “Ingat” pada Bagian A."},
+  {q:"Mengapa kita tidak boleh percaya sepenuhnya pada KA?", o:["KA masih mungkin salah, bias, atau berhalusinasi","KA selalu lambat","KA tidak bisa dipakai"], a:0, h:"Baca ulang daftar alasan manusia tidak boleh bergantung pada KA (Bagian A)."},
+  {q:"Contoh penggunaan KA yang bijak adalah...", o:["Menyalin jawaban AI tanpa membaca","Memakai AI untuk ide awal lalu memeriksa dan memperbaikinya sendiri","Menyerahkan semua PR pada AI"], a:1, h:"Lihat tabel pembagian tugas KA dan manusia pada Bagian A."},
+  {q:"Dampak jika terlalu bergantung pada KA adalah...", o:["Berpikir kritis dan kreativitas kurang terlatih","Otak makin pintar otomatis","Tugas selalu benar"], a:0, h:"Baca ulang poin “Ketergantungan” pada Bagian A."},
+  {q:"Siapa pemegang kendali dan penanggung jawab akhir saat memakai KA?", o:["KA itu sendiri","Pembuat aplikasi saja","Manusia sebagai pengguna"], a:2, h:"Baca ulang kotak “Ingat” pada Bagian A, perhatikan siapa yang disebut bertanggung jawab."}
+];
+const kuisB = [
+  {q:"Penggabungan data dari beberapa sensor oleh KA disebut...", o:["Sensor fusion","Data lock","Cache memori"], a:0, h:"Baca ulang paragraf pembuka Bagian B, perhatikan istilah bercetak tebal."},
+  {q:"Mengapa sensor pada mobil otonom digabung?", o:["Agar saling melengkapi kelemahan masing-masing","Agar mobil lebih berat","Supaya hemat bensin"], a:0, h:"Baca ulang kotak “Mengapa sensor digabung?” pada Bagian B."},
+  {q:"Cara manusia menggabungkan informasi banyak bergantung pada...", o:["Algoritma matematika","Intuisi, pengalaman, dan akal sehat","Kecepatan prosesor"], a:1, h:"Lihat baris “Cara menggabungkan” pada tabel Bagian B."},
+  {q:"Kelebihan KA dibanding manusia dalam mengolah informasi sensor adalah...", o:["Punya perasaan","Cepat, konsisten, dan tidak lelah memproses banyak data","Selalu memahami konteks budaya"], a:1, h:"Lihat baris “Kelebihan” kolom KA pada tabel Bagian B."},
+  {q:"Kelebihan manusia dibanding KA saat menggabungkan informasi adalah...", o:["Memahami konteks dan bisa menilai kewajaran informasi","Menghitung jutaan angka dalam sedetik","Tidak pernah salah"], a:0, h:"Lihat baris “Kelebihan” kolom Manusia pada tabel Bagian B."}
+];
+const kuisC = [
+  {q:"Fungsi sensor pada perangkat KA adalah...", o:["Menangkap informasi lingkungan dan mengubahnya menjadi data digital","Mendinginkan prosesor","Menyimpan daftar kontak"], a:0, h:"Baca ulang pengertian sensor pada paragraf pembuka Bagian C."},
+  {q:"Gambar digital pada komputer sebenarnya tersusun dari...", o:["Cat warna","Piksel berupa angka","Huruf-huruf"], a:1, h:"Baca ulang kotak tentang gambar digital di akhir Bagian C."},
+  {q:"Sensor yang dipakai asisten suara untuk 'mendengar' adalah...", o:["Kamera","Mikrofon","GPS"], a:1, h:"Lihat tabel sensor Bagian C, perhatikan kolom “Menangkap”."},
+  {q:"Robot penyedot debu menghindari tembok dengan bantuan sensor...", o:["Jarak (ultrasonik/LiDAR)","Sidik jari","Suhu tubuh"], a:0, h:"Lihat baris radar / LiDAR / ultrasonik pada tabel sensor Bagian C."},
+  {q:"Urutan kerja KA dengan sensor yang benar adalah...", o:["Keputusan ➔ sensor ➔ data","Sensor menangkap data ➔ diubah jadi angka ➔ dicocokkan pola ➔ keputusan","Data ➔ keputusan ➔ sensor"], a:1, h:"Baca ulang paragraf “Alur kerja” pada Bagian C."}
+];
+
+const formatifData = [
+  {q:"Seorang dokter memakai KA untuk menganalisis foto rontgen. KA menandai area mencurigakan pada paru-paru pasien. Sikap dokter yang paling tepat adalah...", o:["Langsung menerima hasil KA sebagai diagnosis akhir","Menjadikan hasil KA sebagai bahan pertimbangan, lalu memutuskan diagnosis berdasarkan pemeriksaan sendiri","Mengabaikan KA karena pasti salah","Menyuruh pasien mengambil keputusan sendiri"], a:1, t:"KA sebagai Alat Bantu", e:"KA berfungsi sebagai alat bantu. Dokter tetap pemegang keputusan dan bertanggung jawab, karena KA bisa saja keliru."},
+  {q:"Rani selalu menyalin jawaban PR Matematika dari KA tanpa mencoba memahaminya. Dampak jangka panjang yang paling mungkin adalah...", o:["Rani menjadi sangat pandai berhitung","Kemampuan berpikir kritis dan memecahkan masalah Rani tidak terlatih karena ketergantungan","KA akan menjadi lebih pintar karena Rani","Rani otomatis mendapat nilai terbaik di semua mapel"], a:1, t:"KA sebagai Alat Bantu", e:"Terlalu bergantung pada KA membuat otak kita jarang berlatih. Gunakan KA untuk belajar, bukan untuk menggantikan proses berpikirmu."},
+  {q:"Aplikasi navigasi berbasis KA menyarankan Pak Ahmad melewati jembatan, padahal di lokasi terpasang tulisan 'Jembatan ditutup'. Sikap yang paling tepat adalah...", o:["Tetap lewat karena KA tidak mungkin salah","Mengikuti kondisi nyata di lapangan, karena saran KA hanyalah rekomendasi","Menyalahkan GPS lalu marah-marah","Menutup mata dan mengikuti suara aplikasi"], a:1, t:"KA sebagai Alat Bantu", e:"Data KA bisa tertinggal atau salah. Manusia harus menilai kondisi nyata dan menjadi penentu keputusan."},
+  {q:"Alasan utama manusia tidak boleh percaya sepenuhnya pada hasil KA adalah...", o:["KA tidak memerlukan listrik","KA masih mungkin menghasilkan output yang salah, bias, atau halusinasi","KA hanya bisa bekerja di siang hari","KA tidak bisa memproses angka"], a:1, t:"KA sebagai Alat Bantu", e:"KA belajar dari data dan pola, sehingga dapat salah, bias, atau mengarang jawaban (halusinasi). Karena itu hasilnya perlu diperiksa."},
+  {q:"Manakah penggunaan KA yang paling bijak dalam kegiatan belajar?", o:["Meminta KA mengerjakan seluruh esai lalu mengaku sebagai karya sendiri","Meminta KA memberi contoh ide, lalu menulis ulang dengan pemahaman sendiri dan mengecek faktanya","Memasukkan data pribadi teman agar KA membuat biografi","Mempercayai semua jawaban KA tanpa membaca"], a:1, t:"KA sebagai Alat Bantu", e:"KA boleh dipakai sebagai alat bantu ide, tetapi hasil akhir harus lewat pemahaman, pengecekan fakta, dan kejujuran dari kita."},
+  {q:"Seorang siswa mengumpulkan laporan hasil KA yang berisi data keliru. Siapa yang paling bertanggung jawab atas kesalahan tersebut?", o:["Aplikasi KA saja","Siswa sebagai pengguna yang mengumpulkan laporan tanpa memeriksa","Pembuat laptop","Tidak ada yang bertanggung jawab"], a:1, t:"KA sebagai Alat Bantu", e:"Pengguna bertanggung jawab atas apa yang ia kumpulkan atau sebarkan. KA hanyalah alat, jadi hasilnya wajib diperiksa."},
+  {q:"Pembagian peran manusia dan KA yang paling ideal adalah...", o:["KA mengolah data besar dan tugas berulang, manusia menilai konteks, etika, dan memutuskan","KA memutuskan semua hal, manusia hanya menonton","Manusia mengerjakan semua tanpa alat apa pun","KA dan manusia saling berlomba"], a:0, t:"KA sebagai Alat Bantu", e:"KA kuat pada kecepatan dan pengolahan data, manusia kuat pada nurani, konteks, dan tanggung jawab. Keduanya saling melengkapi."},
+  {q:"Aplikasi penerjemah KA menerjemahkan sebuah peribahasa secara harfiah sehingga artinya menjadi aneh. Pelajaran yang dapat diambil adalah...", o:["KA tidak pernah memahami bahasa apa pun","KA bisa keliru memahami konteks budaya, sehingga hasilnya perlu dicek manusia","Peribahasa tidak bisa diterjemahkan sama sekali","Aplikasi tersebut pasti terkena virus"], a:1, t:"KA sebagai Alat Bantu", e:"KA memproses pola kata, bukan benar-benar memahami budaya. Hasil terjemahan penting perlu diperiksa manusia."},
+
+  {q:"Saat menyeberang jalan, Dika melihat mobil mendekat dan sekaligus mendengar klakson. Otaknya menggabungkan kedua informasi itu lalu ia berhenti. Hal ini menunjukkan bahwa manusia...", o:["Hanya memakai satu indera pada satu waktu","Menggabungkan informasi dari beberapa indera secara alami untuk memahami situasi","Tidak memerlukan otak untuk mengambil keputusan","Bergantung pada sensor radar"], a:1, t:"Manusia vs KA Menggabungkan Informasi", e:"Manusia memadukan penglihatan, pendengaran, dan indera lain, lalu otak membentuk satu pemahaman. Ini disebut penggabungan informasi multi-indera."},
+  {q:"Perbedaan paling mendasar cara manusia dan KA menggabungkan informasi adalah...", o:["Manusia memakai intuisi, pengalaman, dan akal sehat; KA memakai algoritma dan pola data latih","Manusia memakai sensor radar; KA memakai perasaan","Manusia selalu lebih cepat daripada KA","KA memiliki nurani; manusia tidak"], a:0, t:"Manusia vs KA Menggabungkan Informasi", e:"Manusia memadukan informasi dengan pengalaman dan akal sehat, sedangkan KA menghitung pola angka dari data sensor dan data latih."},
+  {q:"Mobil otonom memakai kamera, radar, dan LiDAR sekaligus. Mengapa sensor-sensor itu digabungkan?", o:["Agar mobil terlihat lebih canggih","Setiap sensor punya keterbatasan, jadi gabungan sensor saling melengkapi dan lebih akurat","Karena satu sensor sudah cukup tapi murah","Supaya mobil tidak membutuhkan baterai"], a:1, t:"Manusia vs KA Menggabungkan Informasi", e:"Satu sensor punya kelemahan. Dengan sensor fusion, kelemahan satu sensor ditutupi sensor lain sehingga keputusan lebih andal."},
+  {q:"Saat kabut tebal, kamera mobil otonom tidak bisa melihat jelas, tetapi radar masih mendeteksi benda di depan. Sistem penggabungan data yang baik akan...", o:["Mengabaikan seluruh data dan berhenti total tanpa alasan","Lebih mengandalkan data radar untuk menutupi kelemahan kamera pada kondisi itu","Hanya memakai kamera karena lebih mahal","Mematikan semua sensor"], a:1, t:"Manusia vs KA Menggabungkan Informasi", e:"Penggabungan data yang baik menyesuaikan kepercayaan pada tiap sensor sesuai kondisi, sehingga radar lebih diandalkan saat kamera terganggu kabut."},
+  {q:"Seseorang mendengar gonggongan dan melihat sosok berbulu di semak, lalu langsung menyimpulkan ada anjing walau tampak samar. Mengapa manusia dapat melakukannya?", o:["Karena manusia memiliki sensor LiDAR","Karena manusia memakai pengalaman hidup dan akal sehat untuk memahami konteks meski informasi tidak lengkap","Karena manusia menghitung jutaan piksel","Karena manusia selalu menebak asal"], a:1, t:"Manusia vs KA Menggabungkan Informasi", e:"Keunggulan manusia: memahami konteks dan memakai pengalaman untuk menyimpulkan walau informasi belum lengkap."},
+  {q:"Dalam hal apa KA lebih unggul daripada manusia saat menggabungkan informasi?", o:["Memahami moral dan empati","Memproses data dari banyak sensor dalam waktu sangat cepat dan konsisten tanpa lelah","Memaknai humor dan budaya","Menilai kewajaran informasi dengan perasaan"], a:1, t:"Manusia vs KA Menggabungkan Informasi", e:"KA unggul dalam kecepatan, konsistensi, dan kemampuan memproses banyak data secara bersamaan tanpa lelah."},
+  {q:"Sensor suhu di ruang kelas tiba-tiba menunjukkan 90°C, padahal semua siswa merasa suhu ruangan biasa saja. Kemampuan manusia yang membedakannya dari KA dalam situasi ini adalah...", o:["Menghitung angka lebih cepat dari sensor","Menilai kewajaran data memakai akal sehat dan konteks, lalu curiga sensornya rusak","Mengubah suhu ruangan dengan pikiran","Mengabaikan semua sensor selamanya"], a:1, t:"Manusia vs KA Menggabungkan Informasi", e:"Manusia dapat menilai bahwa data 90°C tidak masuk akal bila dibandingkan kondisi nyata, lalu memeriksa sensornya. Sistem tanpa pengecekan konteks bisa langsung bereaksi pada data yang salah."},
+  {q:"Asisten pintar sebuah rumah mengenali pemilik dengan menggabungkan suara (mikrofon) dan wajah (kamera). Keuntungan penggabungan ini adalah...", o:["Jika suara pemilik serak, data wajah tetap membantu memastikan identitas","Sistem tidak membutuhkan listrik","Pemilik tidak perlu berada di rumah","Sistem dijamin tidak pernah salah"], a:0, t:"Manusia vs KA Menggabungkan Informasi", e:"Dengan dua sumber data, kelemahan satu sumber (misalnya suara serak) dapat dibantu sumber lain sehingga pengenalan lebih andal. Tetap tidak dijamin 100% benar."},
+
+  {q:"Pada asisten suara di HP, fungsi utama mikrofon adalah...", o:["Mengubah gelombang suara menjadi sinyal digital untuk diolah KA","Menyimpan foto wajah","Mengukur suhu tubuh","Menampilkan peta"], a:0, t:"Perangkat Penginderaan oleh KA", e:"Mikrofon adalah sensor akustik: menangkap suara dan mengubahnya menjadi data digital agar bisa dianalisis KA."},
+  {q:"Sebuah foto digital di komputer sebenarnya disimpan dalam bentuk...", o:["Lukisan cat minyak","Kumpulan piksel yang masing-masing berupa angka (nilai warna/kecerahan)","Kalimat teks","Gelombang panas"], a:1, t:"Perangkat Penginderaan oleh KA", e:"Gambar terdiri dari piksel, dan setiap piksel adalah angka. KA menganalisis kumpulan angka ini untuk menemukan pola."},
+  {q:"AC pintar menyalakan dan mematikan pendingin sesuai kondisi ruangan. Sensor utama yang menyediakan data bagi KA-nya adalah...", o:["Sensor suhu","Sensor sidik jari","Mikrofon","Sensor GPS"], a:0, t:"Perangkat Penginderaan oleh KA", e:"Sensor suhu memberi data suhu ruangan, yang dipakai KA untuk menentukan kapan pendingin menyala atau berhenti."},
+  {q:"Aplikasi ojek online dapat menghitung rute dan jarak ke tujuanmu karena memakai data dari sensor...", o:["Detak jantung","GPS (lokasi)","Cahaya","Sidik jari"], a:1, t:"Perangkat Penginderaan oleh KA", e:"GPS memberi data posisi. KA memakai data posisi itu untuk menghitung rute dan perkiraan jarak."},
+  {q:"Robot penyedot debu otomatis tidak menabrak dinding dan kaki meja. Hal ini terjadi karena robot memiliki sensor...", o:["Jarak, seperti ultrasonik atau LiDAR","Rasa manis","Tekanan darah","Bluetooth musik"], a:0, t:"Perangkat Penginderaan oleh KA", e:"Sensor jarak mengukur seberapa jauh rintangan sehingga robot bisa berbelok sebelum menabrak."},
+  {q:"Mengapa komputer dikatakan tidak 'melihat' seperti manusia?", o:["Karena komputer tidak punya listrik","Karena komputer memproses angka dari sensor lalu mencocokkan pola, tanpa pemahaman makna seperti manusia","Karena kamera komputer selalu rusak","Karena komputer hanya melihat warna hitam putih"], a:1, t:"Perangkat Penginderaan oleh KA", e:"Komputer hanya memproses angka dari sensor dan mencocokkannya dengan pola yang dipelajari. Ia tidak memahami makna gambar seperti manusia."},
+  {q:"Pada pemindai sidik jari HP, urutan kerja yang benar adalah...", o:["KA memutuskan ➔ sensor menangkap ➔ data diubah","Sensor menangkap pola jari ➔ diubah menjadi angka ➔ KA membandingkan dengan data tersimpan ➔ keputusan buka/tolak","Data tersimpan ➔ keputusan ➔ sensor","Keputusan ➔ angka ➔ sensor"], a:1, t:"Perangkat Penginderaan oleh KA", e:"Alur umum: sensor menangkap data, data diubah menjadi angka digital, KA mencocokkan dengan pola, lalu mengambil keputusan."},
+  {q:"Sistem presensi wajah sering salah mengenali siswa ketika ruangan sangat gelap. Penyebab yang paling mungkin adalah...", o:["Kualitas data dari sensor kamera menurun karena cahaya kurang, sehingga pola wajah sulit dikenali","Siswa berubah menjadi orang lain","KA sengaja ingin salah","Listrik berhenti selamanya"], a:0, t:"Perangkat Penginderaan oleh KA", e:"Kualitas data sensor sangat memengaruhi hasil KA. Cahaya kurang membuat gambar buruk sehingga pengenalan wajah salah."},
+  {q:"Smartwatch memberi peringatan saat pola detak jantung pemakainya tampak tidak normal. Pernyataan yang paling tepat tentang hal ini adalah...", o:["Hasilnya pasti diagnosis penyakit yang akurat 100%","Sensor optik membaca aliran darah dan KA menganalisis pola sebagai peringatan awal, tetapi bukan pengganti pemeriksaan dokter","Smartwatch bisa menyembuhkan penyakit jantung","Smartwatch tidak memakai sensor sama sekali"], a:1, t:"Perangkat Penginderaan oleh KA", e:"Sensor dan KA membantu memberi peringatan awal, namun keputusan medis tetap harus lewat dokter. Ini sejalan dengan prinsip KA sebagai alat bantu."}
+];
+
+/* ---------------- UTILITAS ---------------- */
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+function fmt(sec){ sec=Math.max(0,Math.ceil(sec)); return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0'); }
+function esc(t){ return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function textHTML(t){ return esc(t).replace(/\n/g,'<br>'); }
+
+function showModal({icon="ℹ️",title="",body="",ok="OK",onOk=null,cancel=null,onCancel=null}){
+  $('m-ic').textContent=icon; $('m-title').textContent=title; $('m-body').innerHTML=body;
+  const okB=$('m-ok'), caB=$('m-cancel');
+  okB.textContent=ok; okB.onclick=()=>{ $('modal').classList.remove('show'); onOk&&onOk(); };
+  if(cancel){ caB.style.display='block'; caB.textContent=cancel; caB.onclick=()=>{ $('modal').classList.remove('show'); onCancel&&onCancel(); }; }
+  else caB.style.display='none';
+  $('modal').classList.add('show');
+}
+
+function levelName(){ return S.xp>=260?'Master AI':S.xp>=160?'Analis AI':S.xp>=60?'Penjelajah':'Pemula'; }
+function tambahXP(n){ S.xp+=n; $('xp-chip').textContent=`⭐ ${S.xp} XP • ${levelName()}`; }
+
+const stepOrder=['step-login','step-apersepsi','step-materi','step-simulasi','step-formatif'];
+function showStep(id){
+  S.step=id;
+  document.querySelectorAll('.step').forEach(el=>el.classList.remove('active'));
+  $(id).classList.add('active');
+  const idx=stepOrder.indexOf(id);
+  document.querySelectorAll('#stepper div').forEach((d,i)=>{ d.className = i<idx?'done':(i===idx?'now':''); });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function confetti(){
+  const c=$('confetti'), x=c.getContext('2d'); c.width=innerWidth; c.height=innerHeight;
+  const cols=['#4f46e5','#06b6d4','#10b981','#f59e0b','#ef4444','#7c3aed'];
+  const ps=Array.from({length:140},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height*.5,r:4+Math.random()*6,vy:2+Math.random()*4,vx:-2+Math.random()*4,col:cols[Math.floor(Math.random()*cols.length)],rot:Math.random()*6}));
+  let t=0;(function f(){ x.clearRect(0,0,c.width,c.height); ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.rot+=.1;x.save();x.translate(p.x,p.y);x.rotate(p.rot);x.fillStyle=p.col;x.fillRect(-p.r,-p.r/2,p.r*2,p.r);x.restore();}); if(++t<200) requestAnimationFrame(f); else x.clearRect(0,0,c.width,c.height); })();
+}
+
+/* ---------------- RENDER SOAL ---------------- */
+function optHTML(name,val,text,q){
+  return `<label class="opt"><input type="radio" name="${name}" value="${val}" data-q="${q}"><span class="dot"></span><span>${esc(text)}</span></label>`;
+}
+
+function renderDiag(){
+  $('diag-container').innerHTML = diagData.map((it,i)=>
+    `<div class="qcard"><p class="qtext"><b>${i+1}.</b> ${esc(it.q)}</p>${it.o.map((t,j)=>optHTML('diag'+i,j,t,i)).join('')}</div>`).join('');
+}
+
+const quizSource = { qa:kuisA, qb:kuisB, qc:kuisC };
+const quizBox    = { qa:'kuis-a-container', qb:'kuis-b-container', qc:'kuis-c-container' };
+const quizName   = { qa:'Bagian A', qb:'Bagian B', qc:'Bagian C' };
+const quizRun    = { qa:{}, qb:{}, qc:{} };      // status percobaan tiap kuis
+const quizDone   = { qa:false, qb:false, qc:false };
+const quizXP     = new Set();                    // XP hanya diberikan sekali per soal
+
+function semuaKuisTuntas(){ return quizDone.qa && quizDone.qb && quizDone.qc; }
+
+/* Mulai (atau ulangi) kuis: urutan soal DAN urutan pilihan diacak setiap percobaan */
+function renderKuis(data,cid,prefix){ quizRun[prefix]={tries:0}; mulaiKuis(prefix); }
+function mulaiKuis(prefix){
+  const run=quizRun[prefix];
+  run.tries=(run.tries||0)+1; run.idx=0;
+  run.list=shuffle(quizSource[prefix]).map(it=>({
+    q:it.q, h:it.h,
+    o:shuffle(it.o.map((t,j)=>({t:t, ok:j===it.a})))
+  }));
+  tampilSoal(prefix);
+}
+
+function dotsHTML(run,state){
+  return '<div class="dots">'+run.list.map((_,i)=>`<i class="${i<run.idx?'ok':(i===run.idx?(state||'now'):'')}"></i>`).join('')+'</div>';
+}
+
+function tampilSoal(prefix){
+  const run=quizRun[prefix], el=$(quizBox[prefix]), it=run.list[run.idx], n=run.list.length;
+  $('skor-'+prefix).textContent=`Soal ${run.idx+1} / ${n} • Percobaan ke-${run.tries}`;
+  el.innerHTML = dotsHTML(run)+
+    `<div class="qcard"><p class="qtext"><b>Soal ${run.idx+1} dari ${n}.</b> ${esc(it.q)}</p>`+
+    it.o.map((o,j)=>optHTML(prefix+'_q',j,o.t,run.idx)).join('')+
+    `<div class="fb" id="${prefix}_fb"></div><div id="${prefix}_hint"></div>`+
+    `<button class="btn-mini" id="${prefix}_act" disabled>Periksa Jawaban</button></div>`;
+  const btn=$(prefix+'_act');
+  el.querySelectorAll('input').forEach(inp=>inp.addEventListener('change',()=>{ btn.disabled=false; }));
+  btn.onclick=()=>periksaKuis(prefix);
+}
+
+function periksaKuis(prefix){
+  const run=quizRun[prefix], el=$(quizBox[prefix]), it=run.list[run.idx], n=run.list.length;
+  const sel=el.querySelector('input:checked'); if(!sel) return;
+  const pick=it.o[+sel.value];
+  el.querySelectorAll('input').forEach(x=>{ x.disabled=true; x.closest('.opt').classList.add('locked'); });
+  const fb=$(prefix+'_fb'), btn=$(prefix+'_act');
+
+  if(pick.ok){
+    sel.closest('.opt').classList.add('correct');
+    const key=prefix+':'+it.q;
+    if(!quizXP.has(key)){ quizXP.add(key); tambahXP(10); fb.className='fb ok'; fb.textContent='✔ Benar! +10 XP'; }
+    else { fb.className='fb ok'; fb.textContent='✔ Benar!'; }
+    run.idx++;
+    if(run.idx>=n){
+      quizDone[prefix]=true;
+      $('skor-'+prefix).textContent=`✅ Tuntas (${n} / ${n}) • selesai pada percobaan ke-${run.tries}`;
+      fb.textContent+=` 🎉 Kuis ${quizName[prefix]} tuntas!`;
+      btn.style.display='none';
+      cekTombolMateri();
+    } else {
+      btn.textContent='Soal Berikutnya ➔'; btn.classList.add('green');
+      btn.onclick=()=>tampilSoal(prefix);
+    }
+  } else {
+    // SALAH: jawaban benar TIDAK ditampilkan, kuis diulang dari awal dengan susunan acak
+    fb.className='fb no';
+    fb.textContent=`✘ Jawabanmu belum tepat. Kuis ${quizName[prefix]} harus diulang dari awal.`;
+    $(prefix+'_hint').innerHTML=`<div class="hintbox">💡 Petunjuk: ${esc(it.h||'Baca ulang materi dan catatanmu.')}<br>Setelah membaca ulang, tekan tombol di bawah. Soal dan pilihan jawaban akan diacak.</div>`;
+    btn.textContent='🔄 Ulangi Kuis dari Awal'; btn.classList.add('red');
+    btn.onclick=()=>mulaiKuis(prefix);
+    $('skor-'+prefix).textContent=`Percobaan ke-${run.tries} belum berhasil • ulangi dari soal 1`;
+  }
+}
+
+/* ---------------- ALUR ---------------- */
+async function aktifkanKamera(){
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({video:true});
+    $('floating-cam').srcObject=stream;
+    $('floating-cam').style.display='block'; $('cam-label').style.display='block';
+    const b=$('btn-kamera'); b.textContent='✔️ Kamera Pengawas Terverifikasi'; b.classList.add('green'); b.disabled=true;
+    $('form-data-diri').style.display='block';
+    S.kamera=true;
+  }catch(err){
+    showModal({icon:'📷',title:'Kamera Diperlukan',body:'PJJ wajib mengizinkan akses kamera agar ujian dapat diawasi. Periksa izin kamera di browser, lalu coba lagi.'});
+  }
+}
+
+function mulaiApersepsi(){
+  S.nama=$('nama-siswa').value.trim(); S.kelas=$('kelas-siswa').value;
+  if(S.nama.length<3||!S.kelas){ showModal({icon:'✍️',title:'Data belum lengkap',body:'Isi nama lengkap dan pilih kelas terlebih dahulu.'}); return; }
+  $('student-info').textContent=`👤 ${S.nama} • Kelas ${S.kelas}`;
+  $('hud').style.display='block';
+  S.aktif=true;
+  pasangWatermark();
+  renderDiag();
+  showStep('step-apersepsi');
+}
+
+function lanjutMateri(){
+  for(let i=0;i<diagData.length;i++){
+    if(!document.querySelector(`input[name="diag${i}"]:checked`)){ showModal({icon:'📝',title:'Belum lengkap',body:`Soal nomor ${i+1} belum dijawab. Jawab ke-10 soal dulu ya!`}); return; }
+  }
+  tambahXP(10);
+  renderKuis(kuisA,'kuis-a-container','qa');
+  renderKuis(kuisB,'kuis-b-container','qb');
+  renderKuis(kuisC,'kuis-c-container','qc');
+  renderKasus();
+  showStep('step-materi');
+  mulaiTimerMateri();
+}
+
+/* Timer membaca: hanya berkurang saat halaman terlihat */
+let timerMateri=null, sisaMateri=CONFIG.WAKTU_MATERI, materiSelesai=false;
+function mulaiTimerMateri(){
+  if(timerMateri) return;
+  let last=Date.now();
+  timerMateri=setInterval(()=>{
+    const now=Date.now(), dt=(now-last)/1000; last=now;
+    if(document.hidden) return;
+    sisaMateri-=Math.min(dt,2);
+    $('timer-text').textContent=`⏳ Wajib membaca & mencatat: ${fmt(sisaMateri)}`;
+    $('timer-bar').style.width=((CONFIG.WAKTU_MATERI-sisaMateri)/CONFIG.WAKTU_MATERI*100)+'%';
+    if(sisaMateri<=0){
+      clearInterval(timerMateri); materiSelesai=true;
+      $('timer-text').textContent='✅ Waktu selesai! Pastikan catatan sudah lengkap dan semua kuis tuntas.';
+      $('timer-materi').classList.add('ok');
+      cekTombolMateri();
+    }
+  },500);
+}
+function cekTombolMateri(){
+  const siap = materiSelesai && $('cek-catatan').checked && semuaKuisTuntas();
+  $('btn-lanjut-simulasi').disabled = !siap;
+  $('teks-tunggu-materi').style.display = siap ? 'none' : 'block';
+}
+
+function kumpulkanSemuaKuis(){
+  if(!$('cek-catatan').checked){ showModal({icon:'✍️',title:'Catatan belum dibuat',body:'Buat ringkasan materi di buku catatanmu, lalu centang pernyataan di atas.'}); return; }
+  const kurang=['qa','qb','qc'].filter(p=>!quizDone[p]).map(p=>'Bagian '+p[1].toUpperCase());
+  if(kurang.length){ showModal({icon:'📝',title:'Kuis belum tuntas',body:'Kuis berikut belum tuntas (kelima soal harus benar dalam satu percobaan): <b>'+kurang.join(', ')+'</b>.'}); return; }
+  showModal({icon:'🎉',title:'Materi Selesai!',body:'Luar biasa! Sekarang saatnya praktik di laboratorium simulasi.',ok:'Lanjut Simulasi ➔',onOk:()=>showStep('step-simulasi')});
+}
+
+function bukaSimulasi(){
+  if($('kode-simulasi').value.trim()===CONFIG.KODE_SIMULASI){
+    $('lock-simulasi').style.display='none'; $('konten-simulasi').style.display='block';
+  } else { $('error-simulasi').style.display='block'; }
+}
+
+/* ---------------- SIMULASI ---------------- */
+const sim={k:new Set(), f:{}, p:false};
+function tandaiSim(id){ const el=$(id); if(!el.classList.contains('done')){ el.classList.add('done'); tambahXP(20); } cekSimulasiLengkap(); }
+function cekSimulasiLengkap(){
+  const selesai = $('sim1').classList.contains('done') && $('sim2').classList.contains('done') && $('sim3').classList.contains('done');
+  if(selesai){ const b=$('btn-lanjut-formatif'); b.disabled=false; b.textContent='🎯 Semua Simulasi Selesai, Lanjut Ujian Akhir ➔'; b.classList.add('green'); }
+}
+
+/* Simulasi 1: KA sebagai alat bantu */
+const kasus=[
+  {ai:"Asisten KA berkata: \"Ibu kota Australia adalah Sydney.\"", benar:false, info:"Ibu kota Australia adalah Canberra. KA bisa berhalusinasi dengan nada yakin."},
+  {ai:"Asisten KA berkata: \"Air murni mendidih pada 100°C di permukaan laut dengan tekanan udara normal.\"", benar:true, info:"Pernyataan ini benar. Namun kamu baru yakin setelah memeriksanya di buku atau sumber terpercaya."},
+  {ai:"Asisten KA menyusun jadwal belajar dan menetapkan waktu tidur hanya 2 jam per hari agar 'efisien'.", benar:false, info:"KA tidak memahami kebutuhan kesehatan dan konteks hidupmu. Manusia yang harus menilai dan memutuskan."}
+];
+function renderKasus(){
+  $('kasus-container').innerHTML=kasus.map((k,i)=>
+    `<div class="kasus"><div class="ai">🤖 ${esc(k.ai)}</div>
+      <div class="acts"><button id="kp${i}" onclick="pilihKasus(${i},'percaya')">✅ Percaya langsung</button><button id="kv${i}" onclick="pilihKasus(${i},'verifikasi')">🔍 Verifikasi dulu</button></div>
+      <div class="res" id="kr${i}"></div></div>`).join('');
+}
+function pilihKasus(i,aksi){
+  if(sim.k.has(i)) return;
+  const k=kasus[i], r=$('kr'+i);
+  $('kp'+i).disabled=true; $('kv'+i).disabled=true;
+  let teks, warna;
+  if(aksi==='verifikasi'){ teks='✔ Tepat! Kamu memeriksa dulu. '+k.info; warna='#047857'; }
+  else if(k.benar){ teks='⚠ Kebetulan benar, tapi tanpa dicek kamu tidak bisa yakin. '+k.info; warna='#b45309'; }
+  else { teks='❌ Berbahaya! Kamu langsung percaya. '+k.info; warna='#b91c1c'; }
+  r.textContent=teks; r.style.color=warna; r.style.display='block';
+  sim.k.add(i);
+  if(sim.k.size===kasus.length){
+    $('hasil-sim1').textContent='🎯 Kesimpulan: KA adalah alat bantu. Verifikasi dan keputusan akhir tetap ada pada manusia.';
+    $('hasil-sim1').style.color='#047857';
+    tandaiSim('sim1');
+  }
+}
+
+/* Simulasi 2: sensor fusion */
+function simulasiFusion(){
+  const v=$('sim-sensor').value, h=$('hasil-sim-fusion');
+  const data={kamera:[35,40], radar:[90,25], gabung:[96,90]};
+  const [a,b]=data[v];
+  $('bars-fusion').style.display='block';
+  const fa=$('f-a'), fb=$('f-b');
+  [fa,fb].forEach(x=>{x.style.width='0';x.className='fill';x.textContent='';});
+  setTimeout(()=>{
+    [[fa,a],[fb,b]].forEach(([el,n])=>{ el.style.width=n+'%'; el.textContent=n+'%'; el.classList.add(n<50?'low':(n<80?'mid':'')); if(n>=80) el.classList.remove('mid','low'); });
+  },60);
+  if(v==='kamera'){ h.textContent='❌ Kamera terganggu kabut: sulit mendeteksi benda dan jenisnya.'; h.style.color='#b91c1c'; }
+  else if(v==='radar'){ h.textContent='⚠️ Radar tetap mendeteksi benda di depan, tetapi sulit mengenali jenisnya (orang, mobil, atau rambu).'; h.style.color='#b45309'; }
+  else { h.textContent='✔️ Sensor fusion: radar & LiDAR menutupi kelemahan kamera, sehingga deteksi dan pengenalan sama-sama tinggi.'; h.style.color='#047857'; }
+  sim.f[v]=true;
+  if(!(sim.f.kamera&&sim.f.radar&&sim.f.gabung)){ h.textContent+=' Coba konfigurasi lain yang belum dijalankan!'; }
+  else tandaiSim('sim2');
+}
+
+/* Simulasi 3: gambar menjadi angka */
+function mulaiScan(){
+  const btn=$('btn-scan'); btn.style.display='none';
+  const stream=$('floating-cam').srcObject;
+  const vid=$('sim-video');
+  if(stream){ vid.srcObject=stream; $('scan-ph').style.display='none'; }
+  $('scan-ring').classList.add('run');
+  setTimeout(()=>{
+    const N=8, c=document.createElement('canvas'); c.width=N; c.height=N;
+    const ctx=c.getContext('2d');
+    let vals=[], ok=false;
+    try{
+      if(vid.videoWidth>0){
+        ctx.translate(N,0); ctx.scale(-1,1);
+        ctx.drawImage(vid,0,0,N,N);
+        const d=ctx.getImageData(0,0,N,N).data;
+        for(let i=0;i<N*N;i++){ const r=d[i*4],g=d[i*4+1],b=d[i*4+2]; vals.push(Math.round(0.299*r+0.587*g+0.114*b)); }
+        ok=true;
+      }
+    }catch(e){}
+    if(!ok){ for(let y=0;y<N;y++) for(let x=0;x<N;x++) vals.push(Math.min(255,Math.round(40+ (x+y)*14 + Math.random()*20))); }
+    const grid=$('pixgrid');
+    grid.innerHTML=vals.map(g=>`<div style="background:rgb(${g},${g},${g});color:${g>128?'#111':'#fff'}">${g}</div>`).join('');
+    grid.style.display='grid';
+    $('scan-ring').classList.remove('run');
+    $('hasil-scan').style.display='block';
+    if(!sim.p){ sim.p=true; tandaiSim('sim3'); }
+  },1800);
+}
+
+function lanjutFormatifLock(){ showStep('step-formatif'); }
+
+/* ---------------- UJIAN ---------------- */
+let timerUjian=null, akhirUjian=0, urutanUjian=[];
+
+function bukaFormatif(){
+  if($('kode-formatif').value.trim()===CONFIG.KODE_UJIAN){
+    $('lock-formatif').style.display='none'; $('konten-formatif').style.display='block';
+    mulaiUjian();
+  } else { $('error-formatif').style.display='block'; }
+}
+
+function renderUjian(){
+  urutanUjian=formatifData.map(it=>shuffle(it.o.map((_,i)=>i)));
+  $('formatif-container').innerHTML=formatifData.map((it,i)=>
+    `<div class="qcard"><p class="qtext"><b>${i+1}.</b> ${textHTML(it.q)}</p>${urutanUjian[i].map(oi=>optHTML('tf_'+i,oi,it.o[oi],i)).join('')}</div>`).join('');
+  $('formatif-container').querySelectorAll('input').forEach(x=>x.addEventListener('change',updateTerjawab));
+  updateTerjawab();
+}
+function jmlTerjawab(){ let n=0; for(let i=0;i<formatifData.length;i++) if(document.querySelector(`input[name="tf_${i}"]:checked`)) n++; return n; }
+function updateTerjawab(){ $('jml-terjawab').textContent=`${jmlTerjawab()} / ${formatifData.length} terjawab`; }
+function updatePelanggaranInfo(){ $('info-pelanggaran').textContent=`⚠ ${S.pelanggaran}/${CONFIG.MAX_PELANGGARAN}`; }
+
+function mulaiUjian(){
+  S.percobaan++;
+  renderUjian(); updatePelanggaranInfo();
+  akhirUjian=Date.now()+CONFIG.WAKTU_UJIAN*1000;
+  clearInterval(timerUjian);
+  const tick=()=>{
+    const sisa=(akhirUjian-Date.now())/1000;
+    const t=$('timer-ujian'); t.textContent='⏱ '+fmt(sisa); t.classList.toggle('danger',sisa<=300);
+    if(sisa<=0){ clearInterval(timerUjian); showModal({icon:'⌛',title:'Waktu Habis!',body:'Jawabanmu akan dikumpulkan otomatis.',onOk:()=>kumpulkanFormatif()}); }
+  };
+  tick(); timerUjian=setInterval(tick,500);
+  window.scrollTo(0,0);
+}
+
+function konfirmasiKumpul(){
+  const kosong=formatifData.length-jmlTerjawab();
+  if(kosong>0){
+    showModal({icon:'🤔',title:'Masih ada soal kosong',body:`<b>${kosong}</b> soal belum dijawab. Yakin mau mengumpulkan sekarang?`,ok:'Ya, Kumpulkan',onOk:kumpulkanFormatif,cancel:'Kembali Mengerjakan'});
+  } else kumpulkanFormatif();
+}
+
+function motivasiHTML({nilai=0,stat={},curang=false}={}){
+  const nm=esc((S.nama||'').trim().split(/\s+/)[0]||'Ananda');
+  if(curang){
+    return `<div class="motivasi curang"><h3>🌱 Pesan untuk ${nm}</h3>
+      <p>Ujian kali ini dibatalkan karena aturan pengawasan dilanggar. Tidak apa-apa, ini bukan akhir segalanya. Nilai yang jujur, sekecil apa pun, jauh lebih berharga daripada nilai tinggi yang diperoleh dengan cara yang tidak benar.</p>
+      <p>Hubungi gurumu, minta kesempatan lagi, dan siapkan diri dengan membaca ulang materi serta mengulang simulasi. Kamu pasti bisa! 💪</p></div>`;
+  }
+  let judul, isi;
+  if(nilai>=100){
+    judul=`🏆 Sempurna, ${nm}!`;
+    isi='Semua jawabanmu benar! Ini bukti kamu tidak sekadar menghafal, tetapi benar-benar paham bahwa KA adalah alat bantu, cara KA menggabungkan informasi, dan cara sensor bekerja. Pertahankan semangat ini dan bantu temanmu bijak menggunakan KA.';
+  } else if(nilai>=90){
+    judul=`🌟 Luar biasa, ${nm}!`;
+    isi='Pemahamanmu sudah sangat kuat. Tinggal sedikit lagi menuju sempurna. Baca penjelasan pada soal yang masih keliru di bawah, lalu kamu siap menjadi pengguna KA yang kritis.';
+  } else if(nilai>=CONFIG.KKM){
+    judul=`👏 Hebat, ${nm}! Kamu tuntas!`;
+    isi='Kamu sudah memenuhi KKM dan itu hasil dari usahamu. Manfaatkan penjelasan di bawah untuk memperkuat bagian yang belum tepat, karena kesalahan adalah cara belajar yang paling efektif.';
+  } else {
+    judul=`💪 Tetap semangat, ${nm}!`;
+    isi='Terus belajar dan jangan menyerah. Baca kembali materi dan penjelasan jawaban, lalu coba lagi.';
+  }
+  const kuat=Object.keys(stat).filter(t=>stat[t].s===0);
+  const lemah=Object.keys(stat).filter(t=>stat[t].s>0);
+  const li=a=>a.map(t=>`<li>${esc(t)}</li>`).join('');
+  return `<div class="motivasi"><h3>${judul}</h3><p>${isi}</p>
+    <div class="mot-grid">
+      <div class="mot-col"><b>💪 Kekuatanmu</b>${kuat.length?`<ul>${li(kuat)}</ul>`:'Terus berlatih, kekuatanmu akan segera terlihat!'}</div>
+      <div class="mot-col"><b>🎯 Perlu diperkuat</b>${lemah.length?`<ul>${li(lemah)}</ul>`:'Tidak ada. Semua topik sudah kamu kuasai! 🎉'}</div>
+    </div>
+    <p class="mot-quote">AI hanyalah alat bantu, kamulah yang memegang kendali. Tetap kritis, tetap jujur, dan terus semangat belajar! 🚀</p></div>`;
+}
+
+function kumpulkanFormatif(){
+  clearInterval(timerUjian);
+  if(S.curang){
+    tampilRapor({nilai:0,lulus:false,curang:true,html:`<div class="feedback-item salah"><b>❌ Ujian dibatalkan:</b> ${esc(S.alasanCurang)}</div>`,motivasi:motivasiHTML({curang:true})});
+    return;
+  }
+  let benar=0, html='';
+  const stat={};
+  formatifData.forEach((it,i)=>{
+    const ans=document.querySelector(`input[name="tf_${i}"]:checked`);
+    const u=ans?parseInt(ans.value):-1;
+    const tp=it.t||'Umum';
+    stat[tp]=stat[tp]||{b:0,s:0};
+    const penj=it.e?`<div class="penjelasan">💡 <b>Penjelasan:</b> ${esc(it.e)}</div>`:'';
+    const tag=`<div class="topik-tag">${esc(tp)}</div>`;
+    if(u===it.a){
+      benar++; stat[tp].b++;
+      html+=`<div class="feedback-item benar"><b>Soal ${i+1}: ✔️ Benar</b>${tag}${penj}</div>`;
+    } else {
+      stat[tp].s++;
+      html+=`<div class="feedback-item salah"><b>Soal ${i+1}: ❌ ${u<0?'Tidak dijawab':'Salah'}</b>${tag}`+
+        (u>=0?`<div class="jwb-siswa">Jawabanmu: <i>${esc(it.o[u])}</i></div>`:'')+
+        `<div class="jwb-benar">Jawaban benar: <i>${esc(it.o[it.a])}</i></div>${penj}</div>`;
+    }
+  });
+  const nilai=Math.round(benar/formatifData.length*100);
+
+  if(nilai<CONFIG.KKM){
+    showModal({icon:'💪',title:`Nilaimu ${nilai}`,body:`Belum mencapai KKM (${CONFIG.KKM}). Jangan menyerah, setiap percobaan membuatmu makin paham! Baca lagi materinya, lalu kerjakan <b>remedial</b> dengan urutan opsi yang diacak ulang.`,ok:'Mulai Remedial',onOk:()=>mulaiUjian()});
+    return;
+  }
+  tambahXP(100);
+  tampilRapor({nilai,lulus:true,curang:false,html,motivasi:motivasiHTML({nilai,stat})});
+}
+
+function tampilRapor({nilai,lulus,curang,html,motivasi=''}){
+  clearInterval(timerMateri); clearInterval(timerUjian);
+  showStep('step-formatif');
+  $('lock-formatif').style.display='none';
+  $('konten-formatif').style.display='none';
+  $('hasil-akhir').style.display='block';
+  $('cetak-nama').textContent=`${S.nama} • Kelas ${S.kelas}`;
+  const box=$('rapor-box'), nl=$('teks-nilai');
+  box.classList.toggle('fail',!lulus);
+  nl.textContent=nilai; nl.style.color=lulus?'#047857':'#b91c1c';
+  $('rapor-judul').textContent=lulus?'🎓 Rapor Lulus PJJ Koding dan KA':'🚫 Ujian Dibatalkan';
+  $('rapor-status').textContent=lulus?`Status: TUNTAS (memenuhi KKM ${CONFIG.KKM})`:'Status: TIDAK TUNTAS - hubungi guru mapel';
+  const tgl=new Date().toLocaleString('id-ID',{dateStyle:'long',timeStyle:'short'});
+  $('rapor-meta').innerHTML=`<span>⭐ ${S.xp} XP • ${levelName()}</span><span>🔁 Percobaan ke-${S.percobaan}</span><span>⚠ Pelanggaran: ${S.pelanggaran}</span><span>🗓 ${tgl}</span>`;
+  $('feedback-container').innerHTML=html;
+  $('motivasi-box').innerHTML=motivasi;
+  S.aktif=false;
+  const st=$('floating-cam').srcObject;
+  if(st) st.getTracks().forEach(t=>t.stop());
+  $('floating-cam').style.display='none'; $('cam-label').style.display='none';
+  if(lulus) confetti();
+  window.scrollTo(0,0);
+  kirimRekap({nama:S.nama,kelas:S.kelas,nilai,lulus,percobaan:S.percobaan,pelanggaran:S.pelanggaran,xp:S.xp,waktu:tgl});
+}
+
+function kirimRekap(data){
+  if(!CONFIG.SCRIPT_URL) return;
+  try{ fetch(CONFIG.SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(data)}); }catch(e){}
+}
+
+/* ---------------- PENGAWASAN ---------------- */
+function dalamUjian(){ return $('konten-formatif').style.display==='block' && $('hasil-akhir').style.display!=='block' && !S.curang; }
+
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden || !S.aktif) return;
+  S.pelanggaran++;
+  if(dalamUjian()){
+    updatePelanggaranInfo();
+    if(S.pelanggaran>=CONFIG.MAX_PELANGGARAN){
+      S.curang=true; S.alasanCurang=`keluar dari halaman ujian sebanyak ${S.pelanggaran} kali.`;
+      showModal({icon:'🚨',title:'Ujian Dibatalkan',body:`Kamu telah keluar dari halaman ujian ${S.pelanggaran} kali. Nilai otomatis 0.`,onOk:kumpulkanFormatif});
+    } else {
+      showModal({icon:'🚨',title:'Pelanggaran Terdeteksi',body:`Kamu keluar dari halaman ujian. Pelanggaran <b>${S.pelanggaran} dari ${CONFIG.MAX_PELANGGARAN}</b>. ${S.pelanggaran===CONFIG.MAX_PELANGGARAN-1?'<b style="color:#b91c1c">PERINGATAN TERAKHIR!</b> Sekali lagi keluar, nilaimu langsung 0.':'Jika mencapai batas, nilaimu langsung 0.'}`,ok:'Saya Mengerti'});
+    }
+  } else {
+    if(CONFIG.NILAI_NOL_SELURUH_SESI && S.pelanggaran>=CONFIG.MAX_PELANGGARAN){
+      S.curang=true; S.alasanCurang=`meninggalkan halaman sebanyak ${S.pelanggaran} kali selama sesi PJJ.`;
+      showModal({icon:'🚨',title:'Sesi Dihentikan',body:`Kamu telah meninggalkan halaman ${S.pelanggaran} kali. Sesuai tata tertib, nilai otomatis <b>0</b>.`,onOk:kumpulkanFormatif});
+    } else if(CONFIG.NILAI_NOL_SELURUH_SESI){
+      const sisa=CONFIG.MAX_PELANGGARAN-S.pelanggaran;
+      showModal({icon:'⚠️',title:`Pelanggaran ${S.pelanggaran} dari ${CONFIG.MAX_PELANGGARAN}`,body:`Kamu meninggalkan halaman. ${sisa===1?'<b style="color:#b91c1c">PERINGATAN TERAKHIR!</b> Sekali lagi keluar, nilaimu langsung 0.':`Sisa kesempatan: <b>${sisa}</b>. Pada pelanggaran ke-${CONFIG.MAX_PELANGGARAN}, nilaimu langsung 0.`} Waktu baca tidak berjalan saat kamu keluar.`,ok:'Kembali Belajar'});
+    } else {
+      showModal({icon:'⚠️',title:'Pelanggaran Tercatat',body:'Sistem mencatat kamu meninggalkan halaman. Tetap fokus di halaman ini. Waktu baca tidak berjalan saat kamu keluar.',ok:'Kembali Belajar'});
+    }
+  }
+});
+
+function tindakKecurangan(){
+  if(dalamUjian()){
+    S.curang=true; S.alasanCurang='mencoba menyalin (copy) soal ujian.';
+    showModal({icon:'🚨',title:'Peringatan Keras!',body:'Kamu mencoba menyalin soal. Ujian dibatalkan dan nilai otomatis 0.',onOk:kumpulkanFormatif});
+  }
+}
+function blokir(e){
+  const t=e.target;
+  if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA') && e.type!=='contextmenu') return;
+  e.preventDefault(); tindakKecurangan();
+}
+['contextmenu','copy','cut'].forEach(ev=>document.addEventListener(ev,blokir));
+document.addEventListener('keydown',e=>{
+  const k=(e.key||'').toLowerCase();
+  const ctrl=e.ctrlKey||e.metaKey;
+  if((ctrl&&['c','u','s','a'].includes(k)) || e.key==='F12' || (ctrl&&e.shiftKey&&['i','j','c'].includes(k))){
+    e.preventDefault(); tindakKecurangan();
+  }
+});
+document.addEventListener('dragstart',e=>e.preventDefault());
+
+/* ---------------- ANTI SCREENSHOT (penghalang, bukan pemblokir mutlak) ---------------- */
+function pasangWatermark(){
+  if(!CONFIG.ANTI_SCREENSHOT) return;
+  const t=`${S.nama} • ${S.kelas} • ${new Date().toLocaleString('id-ID')}`;
+  const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='380' height='230'><text x='20' y='150' transform='rotate(-25 20 150)' font-family='Arial,sans-serif' font-size='15' font-weight='700' fill='rgba(79,70,229,0.14)'>${esc(t)}</text></svg>`;
+  $('wm').style.backgroundImage=`url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
+  $('wm').style.display='block';
+}
+function pelanggaranUjian(pesan){
+  S.pelanggaran++; updatePelanggaranInfo();
+  if(S.pelanggaran>=CONFIG.MAX_PELANGGARAN){
+    S.curang=true; S.alasanCurang=pesan+' (batas pelanggaran tercapai).';
+    showModal({icon:'🚨',title:'Ujian Dibatalkan',body:`${pesan}. Pelanggaran mencapai ${S.pelanggaran}. Nilai otomatis 0.`,onOk:kumpulkanFormatif});
+  } else {
+    showModal({icon:'📵',title:'Pelanggaran Terdeteksi',body:`${pesan}. Pelanggaran <b>${S.pelanggaran} dari ${CONFIG.MAX_PELANGGARAN}</b>.`,ok:'Saya Mengerti'});
+  }
+}
+function lindungiLayar(ms){
+  document.body.classList.add('shield');
+  setTimeout(()=>{ if(document.hasFocus()) document.body.classList.remove('shield'); },ms);
+}
+if(CONFIG.ANTI_SCREENSHOT){
+  window.addEventListener('blur',()=>{ if(S.aktif) document.body.classList.add('shield'); });
+  window.addEventListener('focus',()=>document.body.classList.remove('shield'));
+  document.addEventListener('keyup',e=>{
+    if(e.key==='PrintScreen' && S.aktif){
+      try{ navigator.clipboard.writeText(' '); }catch(_){}
+      lindungiLayar(1500);
+      if(dalamUjian()) pelanggaranUjian('Terdeteksi menekan tombol PrintScreen');
+    }
+  });
+  document.addEventListener('keydown',e=>{
+    if(S.aktif && ((e.shiftKey&&e.metaKey&&['s','3','4','5'].includes((e.key||'').toLowerCase())))){
+      e.preventDefault(); lindungiLayar(1500);
+      if(dalamUjian()) pelanggaranUjian('Terdeteksi pintasan screenshot');
+    }
+  });
+}
+
+window.addEventListener('beforeunload',e=>{ if(S.aktif){ e.preventDefault(); e.returnValue=''; } });
+</script>
+</body>
+</html>
